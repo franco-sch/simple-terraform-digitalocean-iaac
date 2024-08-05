@@ -24,9 +24,16 @@ variable "space_region" {
 variable "do_spaces_access_key" {
   description = "DigitalOcean Spaces Access Key"
   type        = string
+  sensitive   = true
 }
 
 variable "do_spaces_secret_key" {
   description = "DigitalOcean Spaces Secret Key"
+  type        = string
+  sensitive   = true
+}
+
+variable "ssh_public_key_path" {
+  description = "Path to the SSH public key"
   type        = string
 }
