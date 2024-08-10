@@ -1,8 +1,10 @@
 resource "digitalocean_droplet" "backend" {
-  image    = "ubuntu-22-04-x64"
   name     = "backend-server"
-  region   = "nyc1"
+  image    = "ubuntu-22-04-x64"
   size     = "s-2vcpu-4gb"
+  region   = digitalocean_vpc.production_vpc.region
+  vpc_uuid = digitalocean_vpc.production_vpc.id
+
   ssh_keys = [digitalocean_ssh_key.default.fingerprint]
 
   user_data = <<-EOF
@@ -23,7 +25,7 @@ resource "digitalocean_firewall" "backend" {
   inbound_rule {
     protocol         = "tcp"
     port_range       = "22"
-    source_addresses = ["0.0.0.0/0", "::/0"]
+    source_addresses = [var.ssh_ip_range]
   }
 
   inbound_rule {
@@ -34,7 +36,7 @@ resource "digitalocean_firewall" "backend" {
 
   outbound_rule {
     protocol              = "tcp"
-    port_range            = "1-65535"
+    port_range            = "all"
     destination_addresses = ["0.0.0.0/0", "::/0"]
   }
 }

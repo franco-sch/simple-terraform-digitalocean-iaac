@@ -12,7 +12,7 @@ variable "github_repo" {
 variable "region" {
   description = "DigitalOcean region"
   type        = string
-  default     = "nyc"
+  default     = "nyc1"
 }
 
 variable "space_region" {
@@ -35,5 +35,10 @@ variable "do_spaces_secret_key" {
 
 variable "ssh_public_key_path" {
   description = "Path to the SSH public key"
+  type        = string
+}
+
+variable "ssh_ip_range" {
+  description = "Range of IPs allowed to connect by SSH to droplet"
   type        = string
 }
