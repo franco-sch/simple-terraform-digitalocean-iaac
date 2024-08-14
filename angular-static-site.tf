@@ -1,7 +1,7 @@
 resource "digitalocean_app" "angular_to_digital_ocean" {
   spec {
     name   = "angular-to-digital-ocean2"
-    region = var.region
+    region = var.app_platform_region
 
     static_site {
       name           = "angular-site"

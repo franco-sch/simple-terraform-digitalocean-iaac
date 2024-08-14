@@ -6,6 +6,12 @@ resource "digitalocean_database_cluster" "postgres_cluster" {
   region               = digitalocean_vpc.production_vpc.region
   private_network_uuid = digitalocean_vpc.production_vpc.id
   node_count           = 1
+
+  maintenance_window {
+    day  = "sunday"
+    hour = "03:00:00"
+  }
+
 }
 
 resource "digitalocean_database_firewall" "postgres_firewall" {

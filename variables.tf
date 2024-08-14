@@ -15,6 +15,24 @@ variable "region" {
   default     = "nyc1"
 }
 
+variable "app_platform_region" {
+  description = "App Platform sites region"
+  type        = string
+  default     = "nyc"
+}
+
+variable "environment" {
+  description = "Environment"
+  type        = string
+  default     = "production"
+}
+
+variable "vpc_cidr" {
+  description = "VPC CIDR"
+  type        = string
+  default     = "10.20.0.0/16"
+}
+
 variable "space_region" {
   description = "DigitalOcean space region"
   type        = string
@@ -40,5 +58,10 @@ variable "ssh_public_key_path" {
 
 variable "ssh_ip_range" {
   description = "Range of IPs allowed to connect by SSH to droplet"
+  type        = string
+}
+
+variable "public_domain" {
+  description = "Public apex domain"
   type        = string
 }
