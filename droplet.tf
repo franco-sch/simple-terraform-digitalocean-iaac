@@ -10,9 +10,14 @@ resource "digitalocean_droplet" "backend" {
   user_data = <<-EOF
               #!/bin/bash
               apt-get update
+              echo "Installing Docker"
               apt-get install -y docker.io
               systemctl start docker
               systemctl enable docker
+              echo "Docker installation completed"
+              echo "Installing DigitalOcean Monitoring Agent..."
+              curl -sSL https://repos.insights.digitalocean.com/install.sh | sudo bash
+              echo "DigitalOcean Monitoring Agent installation completed."
               EOF
 }
 
@@ -21,12 +26,6 @@ resource "digitalocean_firewall" "backend" {
   name = "backend-firewall"
 
   droplet_ids = [digitalocean_droplet.backend.id]
-
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "22"
-    source_addresses = [var.ssh_ip_range]
-  }
 
   inbound_rule {
     protocol         = "tcp"

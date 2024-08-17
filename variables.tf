@@ -65,3 +65,9 @@ variable "public_domain" {
   description = "Public apex domain"
   type        = string
 }
+
+variable "alert_email" {
+  description = "Email to send alert information"
+  type        = string
+
+}

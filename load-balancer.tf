@@ -3,16 +3,22 @@ resource "digitalocean_loadbalancer" "backend" {
   name                   = "${var.environment}-backend-lb"
   region                 = var.region
   vpc_uuid               = digitalocean_vpc.production_vpc.id
-  redirect_http_to_https = true
+  # redirect_http_to_https = true
+
+  # forwarding_rule {
+  #   entry_protocol  = "https"
+  #   entry_port      = 443
+  #   target_protocol = "https"
+  #   target_port     = 443
+  #   # certificate_name = digitalocean_certificate.default_cert.name
+  #   tls_passthrough = false
+  # }
 
   forwarding_rule {
-    entry_protocol   = "https"
-    entry_port       = 443
-    target_protocol  = "https"
-    target_port      = 443
-    # certificate_name = digitalocean_certificate.default_cert.name
-    tls_passthrough  = false
-
+    entry_protocol  = "http"
+    entry_port      = 80
+    target_protocol = "http"
+    target_port     = 80
   }
   healthcheck {
     port     = 22

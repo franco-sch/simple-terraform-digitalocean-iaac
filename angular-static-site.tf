@@ -4,10 +4,10 @@ resource "digitalocean_app" "angular_to_digital_ocean" {
     region = var.app_platform_region
 
     static_site {
-      name           = "angular-site"
-      build_command  = "yarn build --configuration=production"
-      source_dir     = "/"
-      output_dir     = "dist"
+      name          = "angular-site"
+      build_command = "yarn build --configuration=production"
+      source_dir    = "/"
+      output_dir    = "dist"
 
       github {
         repo           = var.github_repo
